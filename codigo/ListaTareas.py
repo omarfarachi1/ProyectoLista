@@ -2,8 +2,6 @@ import sys
 from PySide6.QtWidgets import (QApplication, QMainWindow, QLineEdit, QTableWidget,
                                QTableWidgetItem, QVBoxLayout, QWidget, QPushButton, QMessageBox)
 
-from PySide6.QtCore import Qt, QAbstractTableModel
-
 
 class ListadodeTareas(QMainWindow):
     def __init__(self, texto):
@@ -28,22 +26,43 @@ class ListadodeTareas(QMainWindow):
 
         self.botonMarcar = QPushButton("Marcar como completada")
         layout.addWidget(self.botonMarcar)
+        self.botonMarcar.clicked.connect(self.MarcarCompletada)
 
         self.botonEliminar = QPushButton("Eliminar")
         layout.addWidget(self.botonEliminar)
         self.botonEliminar.clicked.connect(self.Eliminar)
 
+        self.widget_tabla = QTableWidget()
+        layout.addWidget(self.widget_tabla)
+        self.widget_tabla.setColumnCount(2)
+        self.widget_tabla.setHorizontalHeaderItem(0, QTableWidgetItem("Tarea"))
+        self.widget_tabla.setHorizontalHeaderItem(1, QTableWidgetItem("Estado"))
+
 
     def Agregar(self):
-        lista = self.entrada.text()
-        self.list_Tareas.append(lista)
-        print(self.list_Tareas)
+        lista_entrada = self.entrada.text()
+        self.list_Tareas.append({"Tarea": lista_entrada, "Estado": "pendiente"})
+        self.Actualizar()
 
-    def Eliminar(self, indice):
-        if indice < len(self.list_Tareas):
-            del self.list_Tareas[indice]
-        QMessageBox.information(self, "Tarea finalizada", "Se eliminaron las tareas")
+    def Eliminar(self):
+        self.list_Tareas.clear()
+        self.Actualizar()
 
+
+    def MarcarCompletada(self, row):
+        for i in self.list_Tareas:
+            i["Estado"] = "Completada"
+        self.Actualizar()
+        QMessageBox.information(self, "Tarea finalizada", "La tarea ha sido marcada como completada")
+
+
+    def Actualizar(self):
+        self.widget_tabla.setRowCount(0)
+        for i, x in enumerate(self.list_Tareas):
+            self.widget_tabla.insertRow(i)
+            self.widget_tabla.setItem(i, 0, QTableWidgetItem(x["Tarea"]))
+            self.widget_tabla.setItem(i, 1,  QTableWidgetItem(x["Estado"]))
+            
 
 
 if __name__ == "__main__":
