@@ -1,5 +1,5 @@
 import sys
-from proyect_venv.Uic.VentanaLista import Ui_ListaTareas
+from proyect_venv.AppLista.Uic.VentanaLista import Ui_ListaTareas
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMessageBox, QTableWidgetItem)
 
 class ListTareas(QMainWindow, Ui_ListaTareas):
@@ -18,6 +18,7 @@ class ListTareas(QMainWindow, Ui_ListaTareas):
         self.lista_tareas.append({"Tareas": lista_entrada, "Estado": ""})
         self.Actualizar()
 
+
     def MarcarCompletada(self):
         for i in self.lista_tareas:
             i["Estado"] = "Completado"
@@ -28,6 +29,7 @@ class ListTareas(QMainWindow, Ui_ListaTareas):
     def Eliminar(self):
         self.lista_tareas.clear()
         self.Actualizar()
+
 
     def Actualizar(self):
         self.ventanalist.setRowCount(0)
