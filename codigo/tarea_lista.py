@@ -13,7 +13,7 @@ class ListTareas(QMainWindow, Ui_ListaTareas):
         self.Btn_Eliminar.clicked.connect(self.Eliminar)
 
 
-    def Agregar(self):
+    def Agregar(self, lista_entrada):
         lista_entrada = self.entrada.text()
         self.lista_tareas.append({"Tareas": lista_entrada, "Estado": ""})
         self.Actualizar()
