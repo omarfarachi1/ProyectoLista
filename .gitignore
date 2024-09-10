@@ -1,3 +1,7 @@
 **/proyect_venv
 **/Scripts
-**/src
+**/Lib
+**/.idea
+**/.venv
+**/Include
+**/__pycache__
