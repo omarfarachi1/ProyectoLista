@@ -1,5 +1,5 @@
 import sys
-from proyect_venv.AppLista.Uic.VentanaLista import Ui_ListaTareas
+from proyect_venv.AppLista.Uic_pruebas.VentanaLista import Ui_ListaTareas
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMessageBox, QTableWidgetItem)
 
 class ListTareas(QMainWindow, Ui_ListaTareas):
@@ -8,30 +8,30 @@ class ListTareas(QMainWindow, Ui_ListaTareas):
         self.lista_tareas = []
         self.setupUi(self)
         self.retranslateUi(self)
-        self.Btn_Agregar.clicked.connect(self.Agregar)
-        self.Btn_MarcarComple.clicked.connect(self.MarcarCompletada)
-        self.Btn_Eliminar.clicked.connect(self.Eliminar)
+        self.btn_agregar.clicked.connect(self.agregar)
+        self.btn_marcarcomple.clicked.connect(self.marcarcompletada)
+        self.btn_eliminar.clicked.connect(self.eliminar)
 
 
-    def Agregar(self, lista_entrada):
+    def agregar(self):
         lista_entrada = self.entrada.text()
         self.lista_tareas.append({"Tareas": lista_entrada, "Estado": ""})
-        self.Actualizar()
+        self.actualizar()
 
 
-    def MarcarCompletada(self):
+    def marcarcompletada(self):
         for i in self.lista_tareas:
             i["Estado"] = "Completado"
-        self.Actualizar()
+        self.actualizar()
         QMessageBox.information(self, "Tarea finalizada", "La tarea ha sido marcada como completada")
 
 
-    def Eliminar(self):
+    def eliminar(self):
         self.lista_tareas.clear()
-        self.Actualizar()
+        self.actualizar()
 
 
-    def Actualizar(self):
+    def actualizar(self):
         self.ventanalist.setRowCount(0)
         for i, x in enumerate(self.lista_tareas):
             self.ventanalist.insertRow(i)
