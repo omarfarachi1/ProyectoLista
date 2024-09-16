@@ -1,7 +1,6 @@
-class tareas:
+class Tareas:
     def __init__(self):
         self.lista_tareas = []
-        self.lista_tareas_completadas = []
 
     def agregar(self, texto):
         if texto not in self.lista_tareas:
@@ -11,23 +10,19 @@ class tareas:
 
     def completar_tareas(self, texto):
         if texto in self.lista_tareas:
-            self.lista_tareas.remove(texto)
-            self.lista_tareas_completadas.append(texto)
+            print("Tarea completada")
             return True
         else:
+            print("La tarea no existe. Tarea no completada")
             return False
 
-    def tareas_pendientes(self):
+    def __listadetareas(self):
         return self.lista_tareas
 
-    def tareas_completadas(self):
-        return self.lista_tareas_completadas
 
     def eliminar_tarea(self, texto):
         if texto in self.lista_tareas:
             self.lista_tareas.remove(texto)
-        elif texto in self.lista_tareas_completadas:
-            self.lista_tareas_completadas.remove(texto)
         else:
             return False
         return True

@@ -1,5 +1,5 @@
 import sys
-from proyect_venv.AppLista.Uic_pruebas.VentanaLista import Ui_ListaTareas
+from proyect_venv.Uic_pruebas.VentanaLista import Ui_ListaTareas
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMessageBox, QTableWidgetItem)
 
 class ListTareas(QMainWindow, Ui_ListaTareas):
