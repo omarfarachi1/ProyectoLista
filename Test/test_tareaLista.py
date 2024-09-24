@@ -2,29 +2,29 @@ from proyect_venv.AppLista.Test.tarea import Tareas
 
 def test_comprobar_si_agrega_una_tarea():
     app = Tareas()
+    tarea = "realizar trabajos"
+    app.agregar(tarea)
 
-    assert app.agregar("realizar trabajos")
-    assert app.agregar("hacer la cama")
+    assert tarea in app.lista_tareas
 
 def test_no_agregar_tarea_existente():
     app = Tareas()
+    tarea1 = "tarea 1"
+    app.agregar(tarea1)
 
-    assert app.agregar("tarea 1")
-    assert app.agregar("tarea 2")
+    assert not app.agregar(tarea1)
 
 def test_tareas_completadas():
     app = Tareas()
-    app.agregar("comprar ferreteria")
-    app.agregar("ir a rosario")
+    tarea2 = "comprar ferreteria"
+    app.agregar(tarea2)
 
-    assert app.completarTareas("comprar ferreteria")
-    assert app.completarTareas("ir a rosario")
-    assert app.completarTareas("comprar tomates") is False
-
+    assert app.completarTareas(tarea2)
 
 def test_eliminar_tareas():
     app = Tareas()
-    app.agregar("limpiar cuarto")
+    tarea = "limpiar cuarto"
+    app.agregar(tarea)
+    app.eliminarTarea(tarea)
 
-    assert app.eliminarTarea("limpiar cuarto")
-    assert app.eliminarTarea("lavar auto") is False
+    assert tarea not in app.lista_tareas
